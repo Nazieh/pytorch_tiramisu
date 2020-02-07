@@ -6,31 +6,16 @@ from PIL import Image
 from torchvision.datasets.folder import is_image_file, default_loader
 
 
-classes = ['Sky', 'Building', 'Column-Pole', 'Road',
-           'Sidewalk', 'Tree', 'Sign-Symbol', 'Fence', 'Car', 'Pedestrain',
-           'Bicyclist', 'Void']
+classes = ['Print', 'Void']
 
 # https://github.com/yandex/segnet-torch/blob/master/datasets/camvid-gen.lua
-class_weight = torch.FloatTensor([
-    0.58872014284134, 0.51052379608154, 2.6966278553009,
-    0.45021694898605, 1.1785038709641, 0.77028578519821, 2.4782588481903,
-    2.5273461341858, 1.0122526884079, 3.2375309467316, 4.1312313079834, 0])
+class_weight = torch.FloatTensor([4.1312313079834, 0])
 
 mean = [0.41189489566336, 0.4251328133025, 0.4326707089857]
 std = [0.27413549931506, 0.28506257482912, 0.28284674400252]
 
 class_color = [
-    (128, 128, 128),
-    (128, 0, 0),
-    (192, 192, 128),
-    (128, 64, 128),
-    (0, 0, 192),
-    (128, 128, 0),
-    (192, 128, 128),
-    (64, 64, 128),
-    (64, 0, 128),
-    (64, 64, 0),
-    (0, 128, 192),
+    (255, 255, 255),
     (0, 0, 0),
 ]
 
@@ -76,7 +61,7 @@ class LabelTensorToPILImage(object):
         return Image.fromarray(npimg, mode=mode)
 
 
-class CamVid(data.Dataset):
+class Shirts(data.Dataset):
 
     def __init__(self, root, split='train', joint_transform=None,
                  transform=None, target_transform=LabelToLongTensor(),
@@ -93,9 +78,6 @@ class CamVid(data.Dataset):
         self.classes = classes
         self.mean = mean
         self.std = std
-
-        if download:
-            self.download()
 
         self.imgs = _make_dataset(os.path.join(self.root, self.split))
 
