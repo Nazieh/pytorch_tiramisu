@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-import torch.utils.data
+from torch.utils import data
 
 from models import tiramisu
 from datasets import camvid
