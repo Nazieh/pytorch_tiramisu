@@ -18,22 +18,6 @@ import utils.imgs
 import utils.training as train_utils
 import os
 
-loader = data.DataLoader(dataset,
-                         batch_size=10,
-                         num_workers=0,
-                         shuffle=False)
-
-mean = 0.
-std = 0.
-for images, _ in loader:
-    batch_samples = images.size(0) # batch size (the last batch can have smaller size!)
-    images = images.view(batch_samples, images.size(1), -1)
-    mean += images.mean(2).sum(0)
-    std += images.std(2).sum(0)
-
-mean /= len(loader.dataset)
-std /= len(loader.dataset)
-
 
 CAMVID_PATH = os.path.join("gdrive","My Drive","image_extraction","data","tiramisu")
 RESULTS_PATH = Path('gdrive/My Drive/tiramisu/results/')
@@ -42,7 +26,7 @@ RESULTS_PATH.mkdir(exist_ok=True)
 WEIGHTS_PATH.mkdir(exist_ok=True)
 batch_size = 25
 
-normalize = transforms.Normalize(mean=mean, std=std)
+normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 train_joint_transformer = transforms.Compose([
     #joint_transforms.JointRandomCrop(224), # commented for fine-tuning
     joint_transforms.JointRandomHorizontalFlip()
