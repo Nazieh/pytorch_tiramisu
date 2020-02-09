@@ -13,6 +13,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
+import torch.utils.data
 
 from models import tiramisu
 from datasets import camvid
@@ -21,14 +22,31 @@ import utils.imgs
 import utils.training as train_utils
 import os
 
+loader = data.DataLoader(dataset,
+                         batch_size=10,
+                         num_workers=0,
+                         shuffle=False)
+
+mean = 0.
+std = 0.
+for images, _ in loader:
+    batch_samples = images.size(0) # batch size (the last batch can have smaller size!)
+    images = images.view(batch_samples, images.size(1), -1)
+    mean += images.mean(2).sum(0)
+    std += images.std(2).sum(0)
+
+mean /= len(loader.dataset)
+std /= len(loader.dataset)
+
+
 CAMVID_PATH = os.path.join("gdrive","My Drive","image_extraction","data","tiramisu")
-RESULTS_PATH = Path('.results/')
-WEIGHTS_PATH = Path('.weights/')
+RESULTS_PATH = Path('gdrive/My Drive/tiramisu/results/')
+WEIGHTS_PATH = Path('gdrive/My Drive/tiramisu/weights/')
 RESULTS_PATH.mkdir(exist_ok=True)
 WEIGHTS_PATH.mkdir(exist_ok=True)
-batch_size = 2
+batch_size = 25
 
-normalize = transforms.Normalize(mean=camvid.mean, std=camvid.std)
+normalize = transforms.Normalize(mean=mean, std=std)
 train_joint_transformer = transforms.Compose([
     #joint_transforms.JointRandomCrop(224), # commented for fine-tuning
     joint_transforms.JointRandomHorizontalFlip()
