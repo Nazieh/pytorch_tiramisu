@@ -12,7 +12,7 @@ import torchvision.transforms as transforms
 from torch.utils import data
 
 from models import tiramisu
-from datasets import camvid
+from datasets import shirts
 from datasets import joint_transforms
 import utils.imgs
 import utils.training as train_utils
