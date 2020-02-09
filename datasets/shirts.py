@@ -64,7 +64,7 @@ class LabelTensorToPILImage(object):
 class Shirts(data.Dataset):
 
     def __init__(self, root, split='train', joint_transform=None,
-                 transform=None, target_transform=LabelTensorToPILImage(),
+                 transform=None, target_transform=LabelToLongTensor(),
                  download=False,
                  loader=default_loader):
         self.root = root
