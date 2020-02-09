@@ -1,8 +1,4 @@
 
-%matplotlib inline
-%load_ext autoreload
-%autoreload 2
-
 import time
 from pathlib import Path
 import numpy as np
