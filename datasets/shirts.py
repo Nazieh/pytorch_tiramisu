@@ -9,7 +9,7 @@ from torchvision.datasets.folder import is_image_file, default_loader
 classes = ['Void', 'Print']
 
 # https://github.com/yandex/segnet-torch/blob/master/datasets/camvid-gen.lua
-class_weight = torch.FloatTensor([4.1312313079834, 0])
+class_weight = torch.FloatTensor([1, 1])
 
 mean = [0.41189489566336, 0.4251328133025, 0.4326707089857]
 std = [0.27413549931506, 0.28506257482912, 0.28284674400252]
