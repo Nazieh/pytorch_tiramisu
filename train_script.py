@@ -30,7 +30,7 @@ mean = [0.41189489566336, 0.4251328133025, 0.4326707089857]
 std = [0.27413549931506, 0.28506257482912, 0.28284674400252]
 
 
-normalize = transforms.Normalize(mean=mean], std=std)
+normalize = transforms.Normalize(mean=mean, std=std)
 train_joint_transformer = transforms.Compose([
     joint_transforms.JointCenterCrop(128), 
     joint_transforms.JointRandomHorizontalFlip()
