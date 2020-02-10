@@ -4,6 +4,7 @@ import math
 import string
 import random
 import shutil
+import numpy as np
 
 import torch
 import torch.nn as nn
@@ -51,7 +52,7 @@ def error(preds, targets):
     n_pixels = bs*h*w
     incorrect = preds.ne(targets).cpu().sum()
     err = incorrect/n_pixels
-    return round(err,5)
+    return np.round(err,5)
 
 def train(model, trn_loader, optimizer, criterion, epoch):
     model.train()
