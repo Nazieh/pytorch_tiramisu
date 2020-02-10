@@ -68,9 +68,7 @@ def train(model, trn_loader, optimizer, criterion, epoch):
         loss.backward()
         optimizer.step()
         
-        print(loss.data)
-        
-        trn_loss += loss.data[0]
+        trn_loss += loss.data.item()
         pred = get_predictions(output)
         trn_error += error(pred, targets.data.cpu())
 
