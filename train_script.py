@@ -79,7 +79,7 @@ torch.cuda.manual_seed(0)
 model = tiramisu.FCDenseNet67(n_classes=12).cuda()
 model.apply(train_utils.weights_init)
 optimizer = torch.optim.RMSprop(model.parameters(), lr=LR, weight_decay=1e-4)
-criterion = nn.NLLLoss2d(weight=camvid.class_weight.cuda()).cuda()
+criterion = nn.NLLLoss2d(weight=shirts.class_weight.cuda()).cuda()
 
 for epoch in range(1, N_EPOCHS+1):
     since = time.time()
