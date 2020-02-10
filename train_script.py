@@ -28,8 +28,7 @@ batch_size = 25
 
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 train_joint_transformer = transforms.Compose([
-    #joint_transforms.JointRandomCrop(224),
-    transforms.RandomCrop(224),
+    joint_transforms.JointRandomCrop(224), 
     joint_transforms.JointRandomHorizontalFlip()
     ])
 train_dset = shirts.Shirts(CAMVID_PATH, 'train',
