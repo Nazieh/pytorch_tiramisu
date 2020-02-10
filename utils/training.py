@@ -58,7 +58,7 @@ def train(model, trn_loader, optimizer, criterion, epoch):
     trn_loss = 0
     trn_error = 0
     for idx, data in enumerate(trn_loader):
-        print(data)
+        
         inputs = Variable(data[0].cuda())
         targets = Variable(data[1].cuda())
 
@@ -67,7 +67,9 @@ def train(model, trn_loader, optimizer, criterion, epoch):
         loss = criterion(output, targets)
         loss.backward()
         optimizer.step()
-
+        
+        print(loss.data)
+        
         trn_loss += loss.data[0]
         pred = get_predictions(output)
         trn_error += error(pred, targets.data.cpu())
