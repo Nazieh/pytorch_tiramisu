@@ -80,7 +80,8 @@ DECAY_EVERY_N_EPOCHS = 1
 N_EPOCHS = 20
 torch.cuda.manual_seed(0)
 
-model = tiramisu.FCDenseNet67(n_classes=12).cuda()
+#model = tiramisu.FCDenseNet67(n_classes=12).cuda()
+model = tiramisu.FCDenseNet00(n_classes=2).cuda()
 model.apply(train_utils.weights_init)
 optimizer = torch.optim.RMSprop(model.parameters(), lr=LR, weight_decay=1e-4)
 #was criterion = nn.NLLLoss2d(weight=shirts.class_weight.cuda()).cuda()
