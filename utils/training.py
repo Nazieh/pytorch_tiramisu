@@ -74,7 +74,7 @@ def train(model, trn_loader, optimizer, criterion, epoch):
         trn_loss += loss.data.item()
         pred = get_predictions(output)
         trn_error += error(pred, targets.data.cpu())
-        if idx%99 == 0:
+        if (idx+1)%100 == 0:
             print("{} batches done, loss: {}, error: {}.".format(idx+1,trn_loss,trn_error))
         
     trn_loss /= len(trn_loader)
