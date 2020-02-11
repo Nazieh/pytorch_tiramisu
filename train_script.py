@@ -24,7 +24,7 @@ RESULTS_PATH = Path('gdrive/My Drive/tiramisu/results/')
 WEIGHTS_PATH = Path('gdrive/My Drive/tiramisu/weights/')
 RESULTS_PATH.mkdir(exist_ok=True)
 WEIGHTS_PATH.mkdir(exist_ok=True)
-batch_size = 25
+batch_size = 3
 
 mean = [0.41189489566336, 0.4251328133025, 0.4326707089857]
 std = [0.27413549931506, 0.28506257482912, 0.28284674400252]
