@@ -32,7 +32,7 @@ std = [0.27413549931506, 0.28506257482912, 0.28284674400252]
 
 normalize = transforms.Normalize(mean=mean, std=std)
 train_joint_transformer = transforms.Compose([
-    joint_transforms.JointCenterCrop(512), 
+    joint_transforms.JointCenterCrop((512,224)), 
     joint_transforms.JointRandomHorizontalFlip()
     ])
 train_dset = shirts.Shirts(CAMVID_PATH, 'train',
