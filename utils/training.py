@@ -89,7 +89,7 @@ def test(model, test_loader, criterion, epoch=1):
         data = Variable(data.cuda(), volatile=True)
         target = Variable(target.cuda())
         output = model(data)
-        test_loss += criterion(output, target).data[0]
+        test_loss += criterion(output, target).data.item()
         pred = get_predictions(output)
         test_error += error(pred, target.data.cpu())
     test_loss /= len(test_loader)
