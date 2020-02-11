@@ -35,6 +35,10 @@ train_joint_transformer = transforms.Compose([
     joint_transforms.JointCenterCrop((512,224)), 
     joint_transforms.JointRandomHorizontalFlip()
     ])
+test_joint_transformer = transforms.Compose([
+    joint_transforms.JointCenterCrop((512,224))
+    ])
+
 train_dset = shirts.Shirts(CAMVID_PATH, 'train',
       joint_transform=train_joint_transformer,
       transform=transforms.Compose([
@@ -45,7 +49,7 @@ train_loader = torch.utils.data.DataLoader(
     train_dset, batch_size=batch_size, shuffle=True)
 
 val_dset = shirts.Shirts(
-    CAMVID_PATH, 'val', joint_transform=None,
+    CAMVID_PATH, 'val', joint_transform=test_joint_transformer,
     transform=transforms.Compose([
         transforms.ToTensor(),
         normalize
@@ -54,7 +58,7 @@ val_loader = torch.utils.data.DataLoader(
     val_dset, batch_size=batch_size, shuffle=False)
 
 test_dset = shirts.Shirts(
-    CAMVID_PATH, 'test', joint_transform=None,
+    CAMVID_PATH, 'test', joint_transform=test_joint_transformer,
     transform=transforms.Compose([
         transforms.ToTensor(),
         normalize
@@ -99,6 +103,9 @@ for epoch in range(1, N_EPOCHS+1):
     print('Train Time {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
 
+    ### Checkpoint ###    
+    train_utils.save_weights(model, epoch, trn_loss, trn_err)
+    
     ### Test ###
     val_loss, val_err = train_utils.test(model, val_loader, criterion, epoch)    
     print('Val - Loss: {:.4f} | Acc: {:.4f}'.format(val_loss, 1-val_err))
@@ -106,8 +113,7 @@ for epoch in range(1, N_EPOCHS+1):
     print('Total Time {:.0f}m {:.0f}s\n'.format(
         time_elapsed // 60, time_elapsed % 60))
     
-    ### Checkpoint ###    
-    train_utils.save_weights(model, epoch, val_loss, val_err)
+    
 
     ### Adjust Lr ###
     train_utils.adjust_learning_rate(LR, LR_DECAY, optimizer, 
