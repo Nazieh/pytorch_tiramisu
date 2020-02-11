@@ -18,8 +18,8 @@ from . import imgs as img_utils
 #RESULTS_PATH = '.results/'
 #WEIGHTS_PATH = '.weights/'
 
-RESULTS_PATH = Path('gdrive/My Drive/tiramisu/results/')
-WEIGHTS_PATH = Path('gdrive/My Drive/tiramisu/weights/')
+RESULTS_PATH = 'gdrive/My Drive/tiramisu/results/'
+WEIGHTS_PATH = 'gdrive/My Drive/tiramisu/weights/'
 
 def save_weights(model, epoch, loss, err):
     weights_fname = 'weights-%d-%.3f-%.3f.pth' % (epoch, loss, err)
