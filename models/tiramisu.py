@@ -110,6 +110,12 @@ def FCDenseNet67(n_classes):
         up_blocks=(5, 5, 5, 5, 5), bottleneck_layers=5,
         growth_rate=16, out_chans_first_conv=48, n_classes=n_classes)
 
+def FCDenseNet00(n_classes):
+    return FCDenseNet(
+        in_channels=3, down_blocks=(3, 3, 3, 3, 3),
+        up_blocks=(3, 3, 3, 3, 3), bottleneck_layers=5,
+        growth_rate=8, out_chans_first_conv=48, n_classes=n_classes)
+
 
 def FCDenseNet103(n_classes):
     return FCDenseNet(
