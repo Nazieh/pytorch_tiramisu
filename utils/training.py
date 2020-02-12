@@ -13,6 +13,8 @@ from torchvision.utils import save_image
 from torch.autograd import Variable
 import torch.nn.functional as F
 
+import cv2 as cv
+
 from . import imgs as img_utils
 
 #RESULTS_PATH = '.results/'
@@ -131,3 +133,33 @@ def view_sample_predictions(model, loader, n):
         img_utils.view_image(inputs[i])
         img_utils.view_annotated(targets[i])
         img_utils.view_annotated(pred[i])
+
+class Case:
+    def __init__(self,in,target,pred,idx):
+        self.in = in
+        self.target = target
+        self.pred = pred
+        self.idx = idx
+        
+        
+def test_set_predictions(model, loader):
+    cases = []
+    idx = 0
+    for inputs, targets in iter(loader):
+        data = Variable(inputs.cuda(), volatile=True)
+        label = Variable(targets.cuda())
+        output = model(data)
+        pred = get_predictions(output)
+        batch_size = inputs.size(0)
+        case = Case(inputs[0],targets[0],pred[0],idx)
+        idx+=1
+        cases.append(case)
+    
+    for case in cases:
+        in_im =  img_utils.get_image(case.in)
+        target_im = img_utils.get_image(case.target)
+        pred_im =  img_utils.get_image(case.pred)
+        cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}.png"),in_im)
+        cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}_annot.png"),target_im)
+        cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}_pred.png"),pred_im)
+       
