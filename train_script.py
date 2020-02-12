@@ -64,7 +64,7 @@ test_dset = shirts.Shirts(
         normalize
     ]))
 test_loader = torch.utils.data.DataLoader(
-    test_dset, batch_size=batch_size, shuffle=False)
+    test_dset, batch_size=1, shuffle=False)
 
 print("Train: %d" %len(train_loader.dataset.imgs))
 print("Val: %d" %len(val_loader.dataset.imgs))
