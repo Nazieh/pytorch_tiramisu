@@ -135,8 +135,8 @@ def view_sample_predictions(model, loader, n):
         img_utils.view_annotated(pred[i])
 
 class Case:
-    def __init__(self,in,target,pred,idx):
-        self.in = in
+    def __init__(self,inp,target,pred,idx):
+        self.inp = inp
         self.target = target
         self.pred = pred
         self.idx = idx
@@ -156,7 +156,7 @@ def test_set_predictions(model, loader):
         cases.append(case)
     
     for case in cases:
-        in_im =  img_utils.get_image(case.in)
+        in_im =  img_utils.get_image(case.inp)
         target_im = img_utils.get_image(case.target)
         pred_im =  img_utils.get_image(case.pred)
         cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}.png"),in_im)
