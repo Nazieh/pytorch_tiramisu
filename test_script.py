@@ -50,7 +50,7 @@ print("Classes: %d" % len(test_loader.dataset.classes))
 
 
 torch.cuda.manual_seed(0)
-
-model = torch.load(os.path.join(WEIGHTS_PATH,"weights-20-0.217-0.000.pth"))
+model = tiramisu.FCDenseNet00(n_classes=2).cuda()
+model.load_state_dict(torch.load(os.path.join(WEIGHTS_PATH,"weights-20-0.217-0.000.pth")))
 model.eval()
 train_utils.test_set_predictions(model, test_loader)
