@@ -53,3 +53,8 @@ def view_image(tensor):
     inp = np.clip(inp, 0, 1)
     plt.imshow(inp)
     plt.show()
+
+def get_image(tensor):
+      inp = decode_image(tensor)
+      inp = np.clip(inp,0,1)
+      return inp
