@@ -43,7 +43,7 @@ def view_annotated(tensor, plot=True):
     else:
         return rgb
       
- def get_annotated(tensor):
+def get_annotated(tensor):
     temp = tensor.numpy()
     r = temp.copy()
     g = temp.copy()
