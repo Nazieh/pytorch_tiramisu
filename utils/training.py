@@ -157,8 +157,8 @@ def test_set_predictions(model, loader):
     
     for case in cases:
         in_im =  img_utils.get_image(case.inp)
-        target_im = img_utils.get_image(case.target)
-        pred_im =  img_utils.get_image(case.pred)
+        target_im = img_utils.get_annotated(case.target)
+        pred_im =  img_utils.get_annotated(case.pred)
         cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}.png"),in_im)
         cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}_annot.png"),target_im)
         cv.imwrite(os.path.join(RESULTS_PATH,f"{case.idx}_pred.png"),pred_im)
