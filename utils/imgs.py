@@ -34,9 +34,9 @@ def view_annotated(tensor, plot=True):
         b[temp==l]=label_colours[l,2]
 
     rgb = np.zeros((temp.shape[0], temp.shape[1], 3))
-    rgb[:,:,0] = (r/255.0)#[:,:,0]
-    rgb[:,:,1] = (g/255.0)#[:,:,1]
-    rgb[:,:,2] = (b/255.0)#[:,:,2]
+    rgb[:,:,0] = r#[:,:,0]
+    rgb[:,:,1] = g#[:,:,1]
+    rgb[:,:,2] = b#[:,:,2]
     if plot:
         plt.imshow(rgb)
         plt.show()
@@ -54,9 +54,9 @@ def get_annotated(tensor):
         b[temp==l]=label_colours[l,2]
 
     rgb = np.zeros((temp.shape[0], temp.shape[1], 3))
-    rgb[:,:,0] = (r/255.0)#[:,:,0]
-    rgb[:,:,1] = (g/255.0)#[:,:,1]
-    rgb[:,:,2] = (b/255.0)#[:,:,2]
+    rgb[:,:,0] = r#[:,:,0]
+    rgb[:,:,1] = g#[:,:,1]
+    rgb[:,:,2] = b#[:,:,2]
     
     return rgb
 
@@ -75,5 +75,5 @@ def view_image(tensor):
 
 def get_image(tensor):
       inp = decode_image(tensor)
-      inp = np.clip(inp,0,1)
+      #inp = np.clip(inp,0,1)
       return inp
